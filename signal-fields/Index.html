@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SignalPay hosted-form example</title>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+    <script src="https://hosted-fields.signalpay.ru/hosted-fields.iife.js"></script>
+    <script>
+
+        var hostedFields = new SignalPay.HostedFields({
+            siteId: "site_demo_5e85b282c6019c10c8806b34",
+            language: "ru",
+            style: {
+                color: "#FF6600",
+                border: "none"
+            }
+        });
+
+        var init = function () {
+            hostedFields.init([
+                {
+                    id: "sp-panInput",
+                    type: "cardNumber",
+                    customClass: "form-control",
+                    style: {
+                        basic: {
+                            "background": "#74e300",
+                            "border": "none",
+                            "font-family": "SF UI Display Medium",
+                            "font-style": "normal",
+                            "font-size": "18px",
+                            "line-height": "21px",
+                            "text-align": "center",
+                            "color": "#fff",
+                            "transition": "all 0.3s ease-in-out"
+                        },
+                        valid: {
+                            "color": "orange"
+                        },
+                        invalid: {
+                            "color": "rosybrown"
+                        },
+                        focused: {
+                            "color": "white"
+                        }
+                    }
+                },
+                {
+                    id: "sp-expireInput",
+                    type: "cardExpire",
+                    customClass: "form-control",
+                    style: {
+                        basic: {
+                            "background": "#74e300",
+                            "border": "none",
+                            "font-family": "SF UI Display Medium",
+                            "font-style": "normal",
+                            "font-size": "18px",
+                            "line-height": "21px",
+                            "text-align": "center",
+                            "color": "#fff",
+                            "transition": "all 0.3s ease-in-out"
+                        },
+                        valid: {
+                            "color": "orange"
+                        },
+                        invalid: {
+                            "color": "rosybrown"
+                        },
+                        focused: {
+                            "color": "white"
+                        }
+                    }
+                },
+                {
+                    id: "sp-cvvInput", type: "cardCvv", customClass: "form-control",
+                    style: {
+                        basic: {
+                            "background": "#74e300",
+                            "border": "none",
+                            "font-family": "SF UI Display Medium",
+                            "font-style": "normal",
+                            "font-size": "18px",
+                            "line-height": "21px",
+                            "text-align": "center",
+                            "color": "#fff",
+                            "transition": "all 0.3s ease-in-out"
+                        },
+                        valid: {
+                            "color": "orange"
+                        },
+                        invalid: {
+                            "color": "rosybrown"
+                        },
+                        focused: {
+                            "color": "white"
+                        }
+                    }
+                },
+                {
+                    id: "sp-nameInput",
+                    type: "cardName",
+                    customClass: "form-control",
+                    style: {
+                        basic: {
+                            "background": "#74e300",
+                            "border": "none",
+                            "font-family": "SF UI Display Medium",
+                            "font-style": "normal",
+                            "font-size": "18px",
+                            "line-height": "21px",
+                            "text-align": "center",
+                            "color": "#fff",
+                            "transition": "all 0.3s ease-in-out"
+                        },
+                        valid: {
+                            "color": "orange"
+                        },
+                        invalid: {
+                            "color": "rosybrown"
+                        },
+                        focused: {
+                            "color": "white"
+                        }
+                    }
+                }
+            ]);
+
+            hostedFields.onDecline = function (data) {
+                //Вызывается при неудачном платеже, объект data содержит информацию о платеже, если указан - окно с информации об успешном платеже не отображается
+            }
+
+            hostedFields.onApproved = function (data) {
+                //Вызывается при неудачном платеже, объект data содержит информацию о платеже,  если указан - окно с информации об успешном платеже не отображается
+            }
+
+            hostedFields.onPaymentResult = function (data) {
+                //Вызывается при получении ответа от апи((не)успешном завершении платежа), объект data содержит информацию о платеже
+            }
+
+            hostedFields.onValid = function (data) {
+                //Вызывается при попытке проведения платежа с неуспешной валидацией полей
+            }
+        };
+
+        var pay = function () {
+            hostedFields.pay({
+                type: "SMS",
+                amount: 12.34,
+                orderId: "124253445",
+                currency: "RUB",
+                customer: {
+                    eMail: "dev@signalpay.ru",
+                    phone: "79991234567"
+                }
+            });
+        };
+    </script>
+</head>
+<body onLoad="init()">
+<div class="container">
+    <div id="sp-panInput"></div>
+    <div id="sp-expireInput"></div>
+    <div id="sp-cvvInput"></div>
+    <div border="none" id="sp-nameInput"></div>
+    <button id="payBtn" onclick="pay()" type="button">
+        Оплатить 12.34₽
+    </button>
+</div>
+</body>
+</html>

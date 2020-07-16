@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <title>SignaPay</title>
+    <script src="https://hosted-form.signalpay.ru/hosted-form.iife.js"></script>
+    <script>
+        var sp = null;
+        document.onreadystatechange = function () {
+            if (document.readyState === 'complete') {
+                var paymentData = {
+                    siteId: "site_demo_5e85b282c6019c10c8806b34",
+                    display: "modal",
+                    order: {
+                        type: "SMS",
+                        amount: 12.34,
+                        currency: "RUB",
+                        orderId: "123",
+                    }
+                };
+                sp = new SignalPay.HostedForm(paymentData);
+            }
+        };
+
+        var modal = function () {
+            sp.showModal();
+        };
+    </script>
+</head>
+<body>
+<div>
+    <button onclick="modal()" type="submit">My payment button</button>
+</div>
+</body>
+</html>
